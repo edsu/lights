@@ -1,22 +1,11 @@
+#!/usr/bin/env python
+
 import time
 import random
-import requests
 
-from config import HUE_API_URL
+from lights import outside_color, red, green, blue
 
-url = HUE_API_URL + "/lights/2/state"
-
-red = {"xy": [.6, .3]}
-green = {"xy": [.4, .5]}
-blue = {"xy": [.22, .15]}
-
-color = green
 while True:
-    requests.put(url, json=color)
-    if color == green:
-        color = red
-    elif color == red:
-        color = blue
-    else:
-        color = green
-    time.sleep(random.randint(1, 60))
+    for color in [red, green, blue]:
+        outside_color(color)
+        time.sleep(random.randint(1, 10))
