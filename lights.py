@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 import requests
 
 hue_api_key = os.environ.get('HUE_API_KEY')
@@ -21,7 +22,10 @@ blue = {"xy": [.22, .15]}
 
 def set_color(light, color):
     url = "{}/lights/{}/state".format(hue_api_url, light)
-    return requests.put(url, json=color)
+    try:
+        return requests.put(url, json=color)
+    except requests.exceptions.ConnectionError as e:
+        logging.error('unable to talk to light: %s', e)
 
 def outside_color(color):
     return set_color(1, color)

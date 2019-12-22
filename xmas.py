@@ -7,5 +7,6 @@ from lights import outside_color, red, green, blue
 
 while True:
     for color in [red, green, blue]:
+        print(color)
         outside_color(color)
         time.sleep(random.randint(1, 10))
