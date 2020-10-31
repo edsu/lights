@@ -1,7 +1,10 @@
 import os
 import sys
+import dotenv
 import logging
 import requests
+
+dotenv.load_dotenv()
 
 hue_api_key = os.environ.get('HUE_API_KEY')
 if not hue_api_key:
@@ -19,6 +22,7 @@ kitchen = 2
 red = {"xy": [.6, .3]}
 green = {"xy": [.4, .5]}
 blue = {"xy": [.22, .15]}
+orange = {"xy": [.45, .4]}
 
 def set_color(light, color):
     url = "{}/lights/{}/state".format(hue_api_url, light)
